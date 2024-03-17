@@ -1,0 +1,14 @@
+.main-screen {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    transition: 1000ms;
+}
+
+body.menu-open .main-screen {
+    z-index: 1;
+    cursor: pointer;
+    pointer-events: auto;
+    background-color: black;
+    opacity: 0.6;
+}
