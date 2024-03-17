@@ -1,7 +1,14 @@
-.editor {
+.meme-editor{
+    display: none;
+}
+
+.meme-editor.open{
     display: grid;
-    gap: 20px;
+}
+.editor{
+    display: grid;
     justify-items: center;
+    gap: 20px;
     width: 100%;
    
     font-size: 1.5rem;
