@@ -10,7 +10,7 @@
     background-color: #383b42;
 }
 
-.editor input{
+.editor .text {
     width: 100%;
     padding: 1.5em;
     border: 0;

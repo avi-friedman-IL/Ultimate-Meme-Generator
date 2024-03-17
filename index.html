@@ -33,12 +33,13 @@
 
             <canvas width="460" height="460"></canvas>
             <div class="editor">
-                <input type="text" oninput="onSetLineTxt(this)" placeholder="Add Text Here">
+                <input type="text" class="text" oninput="onSetLineTxt(this)" placeholder="Add Text Here">
                 <div class="btns-editor">
                     <button class="switch-line">switch</button>
                     <button class="add-line">add</button>
                     <button class="delete">delete</button>
                 </div>
+                <input type="color" class="color" onchange="onUserColor(this.value)">
                 <div class="font-editors">
 
                 </div>
@@ -55,7 +56,6 @@
         }
     </script>
 
-    <script src="js/main.js"></script>
 
     <script src="js/servic/meme.servic.js"></script>
 

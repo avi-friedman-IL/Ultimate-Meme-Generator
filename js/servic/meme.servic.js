@@ -43,12 +43,15 @@ function getImgs() {
     return gImgs
 }
 
-function setLineTxt(el) {
-    gMeme.lines.txt = el.value
-}
 
 function setImg(id) {
     gMeme.selectedImgId = id
 }
 
+function setLineTxt(el) {
+    gMeme.lines.txt = el.value
+}
 
+function setColor(color) {
+    gMeme.lines.color = color
+}
