@@ -1,5 +1,12 @@
 
 
-.gallery-container{
+.gallery-container.open{
     display: grid;
+}
+/* .gallery-container.open img{
+    width: 80vw;
+} */
+
+.gallery-container{
+    display: none;
 }
