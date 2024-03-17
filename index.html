@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Meme Generator</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body class="main-layout" onload="onInit()">
+
+    <div class="main-screen" onclick="toggleMenu()"></div>
+
+    <header class="main-header">
+        <h2 class="logo">Meme Generator</h2>
+        <nav>
+            <div class="menu-btn" onclick="toggleMenu()">☰</div>
+            <ul>
+                <li class="gallery">Gallery</li>
+                <li class="saved">Saved</li>
+                <li class="randomize">Randomize</li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="filter-searth">
+            <input type="search" data-trans="search" class="search" placeholder="search">
+        </section>
+
+        <section class="meme-editor">
+
+            <canvas width="460" height="460"></canvas>
+            <div class="editor">
+                <input type="text" oninput="onSetLineTxt(this)" placeholder="Add Text Here">
+                <div class="btns-editor">
+                    <button class="switch-line">switch</button>
+                    <button class="add-line">add</button>
+                    <button class="delete">delete</button>
+                </div>
+                <div class="font-editors">
+
+                </div>
+                <a href="#" onclick="downloadCanvas(this)" download="file-name" class="download">Download</a>
+            </div>
+        </section>
+
+        <section class="gallery-container"></section>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            document.body.classList.toggle('menu-open')
+        }
+    </script>
+
+    <script src="js/main.js"></script>
+
+    <script src="js/servic/meme.servic.js"></script>
+
+    <script src="js/controller/gallery.controller.js"></script>
+    <script src="js/controller/meme.controller.js"></script>
+    <script src="js/controller/canvas.js"></script>
+</body>
+
+</html>
