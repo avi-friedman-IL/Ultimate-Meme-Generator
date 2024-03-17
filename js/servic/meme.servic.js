@@ -8,7 +8,7 @@ var gMeme = {
     lines: 
         {
             txt: '',
-            size: 20,
+            size: 50,
             color: 'red'
         } 
 }
@@ -54,4 +54,12 @@ function setLineTxt(el) {
 
 function setColor(color) {
     gMeme.lines.color = color
+}
+
+function textSizeIncrease(){
+    gMeme.lines.size += 10
+}
+
+function textSizeDecrease() {
+    gMeme.lines.size -= 10
 }

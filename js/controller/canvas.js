@@ -1,4 +1,8 @@
 'use strict'
+
+let gElCanvas
+let gCtx
+
 function renderCanvas() {
 
     const meme = getMeme()
@@ -12,6 +16,9 @@ function renderCanvas() {
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         gCtx.fillStyle = meme.lines.color
+        gCtx.font = `${meme.lines.size}px Arial`
+        
+
         drawText(meme.lines.txt, gElCanvas.width / 2, gElCanvas.height / 5)
 
     }
@@ -23,7 +30,6 @@ function drawText(text, x, y) {
     gCtx.strokeStyle = 'black'
 
 
-    gCtx.font = '30px Arial'
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 

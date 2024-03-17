@@ -17,7 +17,7 @@
         <nav>
             <div class="menu-btn" onclick="toggleMenu()">☰</div>
             <ul>
-                <li class="gallery">Gallery</li>
+                <li class="gallery" onclick="toggleToOpenClass()">Gallery</li>
                 <li class="saved">Saved</li>
                 <li class="randomize">Randomize</li>
             </ul>
@@ -29,8 +29,8 @@
             <input type="search" data-trans="search" class="search" placeholder="search">
         </section>
 
+        
         <section class="meme-editor">
-
             <canvas width="460" height="460"></canvas>
             <div class="editor">
                 <input type="text" class="text" oninput="onSetLineTxt(this)" placeholder="Add Text Here">
@@ -39,15 +39,14 @@
                     <button class="add-line">add</button>
                     <button class="delete">delete</button>
                 </div>
+                <button class="text-size-increase" onclick="onTextSizeIncrease()">A+</button>
+                <button class="text-size-decrease" onclick="onTextSizeDecrease()">A-</button>
                 <input type="color" class="color" onchange="onUserColor(this.value)">
-                <div class="font-editors">
-
-                </div>
                 <a href="#" onclick="downloadCanvas(this)" download="file-name" class="download">Download</a>
             </div>
         </section>
 
-        <section class="gallery-container"></section>
+        <section class="gallery-container open"></section>
     </main>
 
     <script>
