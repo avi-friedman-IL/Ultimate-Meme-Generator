@@ -2,14 +2,14 @@
 
 let gImgs
 
-let gLineLocationY = 100
+let gLineNum = 100
 
 let gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
     lines: [
         {
-            y: gLineLocationY,
+            y: gLineNum,
             txt: '',
             size: 25,
             color: 'black'
@@ -74,10 +74,10 @@ function textSizeDecrease() {
 }
 
 function addLine() {
-    gLineLocationY += 50
+    gLineNum += 50
     gMeme.lines.push(
         {
-            y: gLineLocationY,
+            y: gLineNum,
             txt: '',
             size: 25,
             color: 'black'
