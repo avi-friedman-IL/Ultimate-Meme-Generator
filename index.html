@@ -29,26 +29,26 @@
             <input type="search" data-trans="search" class="search" placeholder="search">
         </section>
 
-        
         <section class="meme-editor">
             <canvas width="460" height="460"></canvas>
             <div class="editor">
                 <input type="text" class="text" oninput="onSetLineTxt(this)" placeholder="Add Text Here">
-                <div class="btns-editor">
-                    <button class="switch-line">switch</button>
-                    <button class="add-line">add</button>
+                <div class="btns-lines">
+                    <button class="switch-line" onclick="onSwitchLine()">switch</button>
+                    <button class="add-line" onclick="onAddLine()">add line</button>
                     <button class="delete">delete</button>
                 </div>
-                <button class="text-size-increase" onclick="onTextSizeIncrease()">A+</button>
-                <button class="text-size-decrease" onclick="onTextSizeDecrease()">A-</button>
-                <input type="color" class="color" onchange="onUserColor(this.value)">
+                <div class="btns-txt">
+                    <button class="text-size-increase" onclick="onTextSizeIncrease()">A+</button>
+                    <button class="text-size-decrease" onclick="onTextSizeDecrease()">A-</button>
+                    <input type="color" class="color" onchange="onUserColor(this.value)">
+                </div>
                 <a href="#" onclick="downloadCanvas(this)" download="file-name" class="download">Download</a>
             </div>
         </section>
 
         <section class="gallery-container open"></section>
     </main>
-
     
     <script>
         function toggleMenu() {
@@ -56,7 +56,7 @@
         }
     </script>
 
-
+    <script src="js/servic/storage.service.js"></script>
     <script src="js/servic/meme.servic.js"></script>
 
     <script src="js/controller/gallery.controller.js"></script>

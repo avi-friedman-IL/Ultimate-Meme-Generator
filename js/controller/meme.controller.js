@@ -30,3 +30,12 @@ function onTextSizeDecrease() {
     textSizeDecrease()
     renderMeme()
 }
+
+function onAddLine() {
+    addLine()    
+}
+
+function onSwitchLine() {
+    switchLine()
+    renderMeme()
+}

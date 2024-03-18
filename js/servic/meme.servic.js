@@ -1,19 +1,24 @@
 'use strict'
 
-var gImgs
+let gImgs
 
-var gMeme = {
+let gLineLocationY = 100
+
+let gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
-    lines: 
+    lines: [
         {
+            y: gLineLocationY,
             txt: '',
-            size: 50,
-            color: 'red'
-        } 
+            size: 25,
+            color: 'black'
+        },
+
+    ]
 }
 
-var gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
+let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 createImgs()
 
@@ -27,16 +32,20 @@ function createImgs() {
     gImgs = [
         createImg(1, 'meme-imgs/meme-imgs (square)/1.jpg', ['funny', 'cat']),
         createImg(2, 'meme-imgs/meme-imgs (square)/2.jpg', ['funny', 'cat']),
+        createImg(3, 'meme-imgs/meme-imgs (square)/3.jpg', ['funny', 'cat']),
+        createImg(4, 'meme-imgs/meme-imgs (square)/4.jpg', ['funny', 'cat']),
+        createImg(5, 'meme-imgs/meme-imgs (square)/5.jpg', ['funny', 'cat']),
+        createImg(6, 'meme-imgs/meme-imgs (various aspect ratios)/2.jpg', ['funny', 'cat']),
     ]
 }
 
 function getImg() {
     return gImgs.find(img => img.id === gMeme.selectedImgId)
-   
+
 }
 function getMeme() {
     return gMeme
-   
+
 }
 
 function getImgs() {
@@ -49,17 +58,35 @@ function setImg(id) {
 }
 
 function setLineTxt(el) {
-    gMeme.lines.txt = el.value
+    gMeme.lines[gMeme.selectedLineIdx].txt = el.value
 }
 
 function setColor(color) {
-    gMeme.lines.color = color
+    gMeme.lines[gMeme.selectedLineIdx].color = color
 }
 
-function textSizeIncrease(){
-    gMeme.lines.size += 10
+function textSizeIncrease() {
+    gMeme.lines[gMeme.selectedLineIdx].size += 10
 }
 
 function textSizeDecrease() {
-    gMeme.lines.size -= 10
+    gMeme.lines[gMeme.selectedLineIdx].size -= 10
+}
+
+function addLine() {
+    gLineLocationY += 50
+    gMeme.lines.push(
+        {
+            y: gLineLocationY,
+            txt: '',
+            size: 25,
+            color: 'black'
+        })
+    gMeme.selectedLineIdx += 1
+    console.log(gMeme)
+}
+
+function switchLine() {
+    if (gMeme.selectedLineIdx === 0) gMeme.selectedLineIdx += 1
+    else gMeme.selectedLineIdx -= 1
 }
