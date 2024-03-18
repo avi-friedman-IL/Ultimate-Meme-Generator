@@ -8,33 +8,41 @@ function renderCanvas() {
     const meme = getMeme()
     const imgToEdit = getImg()
 
+    const { lines, selectedLineIdx: lineIdx } = meme
+
     const img = new Image()
     img.src = imgToEdit.url
+
 
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
 
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-        gCtx.fillStyle = meme.lines.color
-        gCtx.font = `${meme.lines.size}px Arial`
-        
-
-        drawText(meme.lines.txt, gElCanvas.width / 2, gElCanvas.height / 5)
+        gCtx.fillStyle = lines[lineIdx].color
+        gCtx.font = `${lines[lineIdx].size}px Arial`
+        drawText(lines[lineIdx].txt)
 
     }
 }
 
 
-function drawText(text, x, y) {
-    gCtx.lineWidth = 1
-    gCtx.strokeStyle = 'black'
+function drawText() {
+    const meme = getMeme()
+    const { selectedLineIdx: lineIdx, lines } = meme
 
 
     gCtx.textAlign = 'center'
     gCtx.textBaseline = 'middle'
 
-    gCtx.fillText(text, x, y)
-    gCtx.strokeText(text, x, y)
+    let x = gElCanvas.width / 2
+    
+    lines.forEach(line => {
+        gCtx.font = `${line.size}px Arial`
+        gCtx.fillStyle = line.color
+        gCtx.fillText(line.txt, x, line.y)
+        // gCtx.strokeRect(100, line.y - line.size / 2, x, line.size)
+        gCtx.stroke()
+    })
 }
 
 function downloadCanvas(elLink) {
