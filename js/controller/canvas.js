@@ -40,7 +40,6 @@ function mouseDown(ev) {
         lines[gMeme.selectedLineIdx].isMark = false
         gMeme.selectedLineIdx = lineIdx
         lines[gMeme.selectedLineIdx].isMark = true
-        lines[gMeme.selectedLineIdx].borderColor = 'green'
    
     } else {
         lines[gMeme.selectedLineIdx].isMark = false

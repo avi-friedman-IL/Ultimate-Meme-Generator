@@ -18,7 +18,7 @@ let gMeme = {
             borderColor: 'green',
             isMark:true
 
-        },
+        }
 
     ]
 }
@@ -91,27 +91,24 @@ function addLine() {
             isMark:true
         })
 
-    lines[gMeme.selectedLineIdx].borderColor = 'black'
-    lines[gMeme.selectedLineIdx].isMark = false
+        
+        lines[gMeme.selectedLineIdx].isMark = false
     gMeme.selectedLineIdx += 1
-    lines[gMeme.selectedLineIdx].borderColor = 'green'
-    renderMeme()
+    lines[gMeme.selectedLineIdx].isMark = true
 }
 
 function switchLine() {
     let { lines } = gMeme
-    // lines[gMeme.selectedLineIdx].borderColor = 'black'
     lines[gMeme.selectedLineIdx].isMark = false
     
+    
     if (gMeme.selectedLineIdx >= lines.length - 1) {
+        // lines[gMeme.selectedLineIdx].isMark = false
         gMeme.selectedLineIdx = 0
-        lines[gMeme.selectedLineIdx].isMark = true
-        lines[gMeme.selectedLineIdx].borderColor = 'green'
     }
     else {
+        // lines[gMeme.selectedLineIdx].isMark = false
         gMeme.selectedLineIdx += 1
         lines[gMeme.selectedLineIdx].isMark = true
-        lines[gMeme.selectedLineIdx].borderColor = 'green'
     }
-    renderMeme()
 }

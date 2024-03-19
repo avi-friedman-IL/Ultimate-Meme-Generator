@@ -32,7 +32,8 @@ function onTextSizeDecrease() {
 }
 
 function onAddLine() {
-    addLine()    
+    addLine()
+    renderMeme()    
 }
 
 function onSwitchLine() {
