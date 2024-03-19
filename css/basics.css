@@ -18,7 +18,7 @@ body {
 }
 
 img {
-    width: 70vw;
+    width: 100%;
 }
 
 ul {
@@ -37,7 +37,7 @@ a {
 
 main {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 30px 1fr 30px;
     gap: 10px;
 
 }

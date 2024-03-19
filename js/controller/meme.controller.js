@@ -39,3 +39,8 @@ function onSwitchLine() {
     switchLine()
     renderMeme()
 }
+
+function onMouseDown(ev) {
+    mouseDown(ev)
+    renderMeme()
+}

@@ -4,6 +4,7 @@
 
 .meme-editor.open{
     display: grid;
+    justify-items: center;
 }
 .editor{
     display: grid;
