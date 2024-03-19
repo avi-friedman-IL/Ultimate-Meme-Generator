@@ -2,17 +2,20 @@
 
 let gImgs
 
-let gLineNum = 100
+let gLineLocationX
+let gLineLocationY = 100
 
 let gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
     lines: [
         {
-            y: gLineNum,
+            x: gLineLocationX,
+            y: gLineLocationY,
             txt: '',
             size: 25,
-            color: 'black'
+            color: 'black',
+            borderColor: 'green'
         },
 
     ]
@@ -30,7 +33,6 @@ function createImg(id, url, keywords) {
 
 function createImgs() {
     gImgs = [
-        createImg(1, 'meme-imgs/meme-imgs (square)/1.jpg', ['funny', 'cat']),
         createImg(2, 'meme-imgs/meme-imgs (square)/2.jpg', ['funny', 'cat']),
         createImg(3, 'meme-imgs/meme-imgs (square)/3.jpg', ['funny', 'cat']),
         createImg(4, 'meme-imgs/meme-imgs (square)/4.jpg', ['funny', 'cat']),
@@ -74,19 +76,35 @@ function textSizeDecrease() {
 }
 
 function addLine() {
-    gLineNum += 50
+    let { lines } = gMeme
+    gLineLocationY += 50
     gMeme.lines.push(
         {
-            y: gLineNum,
+            x: gLineLocationX,
+            y: gLineLocationY,
             txt: '',
             size: 25,
-            color: 'black'
+            color: '',
+            borderColor: 'green'
         })
+
+    lines[gMeme.selectedLineIdx].borderColor = 'black'
     gMeme.selectedLineIdx += 1
-    console.log(gMeme)
+    lines[gMeme.selectedLineIdx].borderColor = 'green'
+    renderMeme()
 }
 
 function switchLine() {
-    if (gMeme.selectedLineIdx === 0) gMeme.selectedLineIdx += 1
-    else gMeme.selectedLineIdx -= 1
+    let { lines } = gMeme
+    lines[gMeme.selectedLineIdx].borderColor = 'black'
+
+    if (gMeme.selectedLineIdx >= lines.length - 1) {
+        gMeme.selectedLineIdx = 0
+        lines[gMeme.selectedLineIdx].borderColor = 'green'
+    }
+    else {
+        gMeme.selectedLineIdx += 1
+        lines[gMeme.selectedLineIdx].borderColor = 'green'
+    }
+    renderMeme()
 }
