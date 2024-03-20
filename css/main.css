@@ -1,11 +1,12 @@
-@import url('basics.css');
+@import url('fonts.css');
 @import url('vars.css');
+@import url('basics.css');
+@import url('mq.css');
 @import url('header.css');
 @import url('screen.css');
 @import url('canvas.css');
 @import url('gallery.css');
 @import url('editor.css');
 @import url('helpers.css');
-@import url('mq.css');
 
 

@@ -1,7 +1,13 @@
 
 
 .gallery-container.open{
-    display: grid;
+    display: block;
+    margin: 50px auto;
+    break-inside: avoid;
+}
+
+.gallery-container.open>*{
+    margin-block-end: 0;
 }
 /* .gallery-container.open img{
     width: 80vw;

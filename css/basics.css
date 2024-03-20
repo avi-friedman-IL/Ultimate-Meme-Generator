@@ -14,11 +14,23 @@ h6 {
 }
 
 body {
+    position: relative;
+    font-family: Roboto;
     background-color: var(--primary-color-1);
 }
 
 img {
+    margin: 0;
     width: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+
+    transition: .5s;
+}
+
+img:hover{
+    padding: .5em;
+    opacity: 0.8;
 }
 
 ul {
@@ -27,7 +39,6 @@ ul {
 
 li {
     cursor: pointer;
-
 }
 
 a {
@@ -36,10 +47,10 @@ a {
 }
 
 main {
+    margin: 80px auto;
     display: grid;
     grid-template-columns: 30px 1fr 30px;
     gap: 10px;
-
 }
 
 main>* {

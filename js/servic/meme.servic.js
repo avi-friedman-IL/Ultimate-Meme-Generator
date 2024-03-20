@@ -2,22 +2,27 @@
 
 let gImgs
 
-let gLineLocationX
-let gLineLocationY = 100
+// let gLineLocationX
+// let gLineLocationY = 100
 
 let gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
+    linePos: 0,
     lines: [
         {
-            x: gLineLocationX,
-            y: gLineLocationY,
+            borderXL:200,
+            borderXR:100,
+            x: 100,
+            y: 100,
             txt: '',
             size: 25,
-            color: 'black',
-            borderColor: 'green',
-            isMark:true
-
+            align: 'center',
+            color: 'white',
+            fontFamily: 'Arial',
+            isDelete: false,
+            isMark: true,
+            isDrag: false,
         }
 
     ]
@@ -39,7 +44,18 @@ function createImgs() {
         createImg(3, 'meme-imgs/meme-imgs (square)/3.jpg', ['funny', 'cat']),
         createImg(4, 'meme-imgs/meme-imgs (square)/4.jpg', ['funny', 'cat']),
         createImg(5, 'meme-imgs/meme-imgs (square)/5.jpg', ['funny', 'cat']),
-        createImg(6, 'meme-imgs/meme-imgs (various aspect ratios)/2.jpg', ['funny', 'cat']),
+        createImg(6, 'meme-imgs/meme-imgs (square)/6.jpg', ['funny', 'cat']),
+        createImg(7, 'meme-imgs/meme-imgs (square)/7.jpg', ['funny', 'cat']),
+        createImg(8, 'meme-imgs/meme-imgs (square)/8.jpg', ['funny', 'cat']),
+        createImg(9, 'meme-imgs/meme-imgs (square)/9.jpg', ['funny', 'cat']),
+        createImg(10, 'meme-imgs/meme-imgs (square)/10.jpg', ['funny', 'cat']),
+        // createImg(11, 'meme-imgs/meme-imgs (square)/11.jpg', ['funny', 'cat']),
+        createImg(12, 'meme-imgs/meme-imgs (square)/12.jpg', ['funny', 'cat']),
+        createImg(13, 'meme-imgs/meme-imgs (square)/13.jpg', ['funny', 'cat']),
+        createImg(14, 'meme-imgs/meme-imgs (square)/14.jpg', ['funny', 'cat']),
+        createImg(15, 'meme-imgs/meme-imgs (square)/15.jpg', ['funny', 'cat']),
+        createImg(16, 'meme-imgs/meme-imgs (square)/16.jpg', ['funny', 'cat']),
+        createImg(17, 'meme-imgs/meme-imgs (square)/17.jpg', ['funny', 'cat']),
     ]
 }
 
@@ -56,13 +72,12 @@ function getImgs() {
     return gImgs
 }
 
-
 function setImg(id) {
     gMeme.selectedImgId = id
 }
 
-function setLineTxt(el) {
-    gMeme.lines[gMeme.selectedLineIdx].txt = el.value
+function setLineTxt(txt) {
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt
 }
 
 function setColor(color) {
@@ -77,37 +92,79 @@ function textSizeDecrease() {
     gMeme.lines[gMeme.selectedLineIdx].size -= 10
 }
 
+function selectStickers(sticker) {
+    gMeme.lines[gMeme.selectedLineIdx].txt += sticker
+}
+
+function textLayout(layout) {
+    const { lines } = getMeme()
+    switch (layout) {
+        case 'left':
+            lines[gMeme.selectedLineIdx].align = 'left'
+            break
+        case 'center':
+            lines[gMeme.selectedLineIdx].align = 'center'
+            break
+        case 'right':
+            lines[gMeme.selectedLineIdx].align = 'right'
+            break
+    }
+}
+
+function clearLine() {
+    gMeme.lines[gMeme.selectedLineIdx].isDelete = true
+}
+
+function selectFont(value) {
+    switch (value) {
+        case 'arial':
+            gMeme.lines[gMeme.selectedLineIdx].fontFamily = 'Arial'
+            break
+        case 'montserrat':
+            gMeme.lines[gMeme.selectedLineIdx].fontFamily = 'Montserrat'
+            break
+        case 'roboto':
+            gMeme.lines[gMeme.selectedLineIdx].fontFamily = 'Roboto'
+            break
+        case 'poppins':
+            gMeme.lines[gMeme.selectedLineIdx].fontFamily = 'Poppins'
+            break
+    }
+}
+
 function addLine() {
-    let { lines } = gMeme
-    gLineLocationY += 50
+    let { lines, linePos } = gMeme
+    linePos += 30
     gMeme.lines.push(
         {
-            x: gLineLocationX,
-            y: gLineLocationY,
+            borderXL:200,
+            borderXR:100,
+            x: 0,
+            y: lines[lines.length - 1].y + linePos,
             txt: '',
             size: 25,
+            align: 'center',
             color: '',
-            borderColor: 'green',
-            isMark:true
+            fontFamily: 'Arial',
+            isDelete: false,
+            isMark: true,
+            isDrag: false
         })
-
-        
-        lines[gMeme.selectedLineIdx].isMark = false
-    gMeme.selectedLineIdx += 1
+    
+    lines[gMeme.selectedLineIdx].isMark = false
+    gMeme.selectedLineIdx = lines.length - 1
+    lines[gMeme.selectedLineIdx].txt = ''
     lines[gMeme.selectedLineIdx].isMark = true
 }
 
 function switchLine() {
     let { lines } = gMeme
     lines[gMeme.selectedLineIdx].isMark = false
-    
-    
+
     if (gMeme.selectedLineIdx >= lines.length - 1) {
-        // lines[gMeme.selectedLineIdx].isMark = false
         gMeme.selectedLineIdx = 0
-    }
-    else {
-        // lines[gMeme.selectedLineIdx].isMark = false
+        lines[gMeme.selectedLineIdx].isMark = true
+    } else {
         gMeme.selectedLineIdx += 1
         lines[gMeme.selectedLineIdx].isMark = true
     }

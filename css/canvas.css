@@ -1,4 +1,15 @@
 canvas {
+    font-family: Montserrat;
     background-color: antiquewhite;
 }
 
+
+.montserrat{
+    font-family: Montserrat;
+}
+.roboto{
+    font-family: Roboto;
+}
+.poppins{
+    font-family:Poppins ;
+}
