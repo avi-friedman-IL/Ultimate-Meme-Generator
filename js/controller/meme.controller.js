@@ -17,7 +17,8 @@ function onSetLineTxt(el) {
     renderMeme()
 }
 
-function onUserColor(elValue) {
+function onUserColor(ev, elValue) {
+    console.log(ev);
     setColor(elValue)
     renderMeme()
 }
@@ -30,10 +31,13 @@ function onTextSizeDecrease() {
     textSizeDecrease()
     renderMeme()
 }
-
+function onTextLayout(layout) {
+    textLayout(layout)
+    renderMeme()
+}
 function onAddLine() {
     addLine()
-    renderMeme()    
+    renderMeme()
 }
 
 function onSwitchLine() {
@@ -43,5 +47,16 @@ function onSwitchLine() {
 
 function onMouseDown(ev) {
     mouseDown(ev)
+    renderMeme()
+}
+
+function onSelectFont(value) {
+    console.log('hi');
+    selectFont(value)
+    renderMeme()
+}
+
+function onClearLine() {
+    clearLine()
     renderMeme()
 }

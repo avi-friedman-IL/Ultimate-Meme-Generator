@@ -1,5 +1,25 @@
-@media (min-width:700px) {
- 
-    
+@media (min-width:600px) {
+    main {
+        display: grid;
+        grid-auto-flow: column;
+        grid-template-columns: minmax(50px 1fr) 1fr minmax(50px 1fr);
+    }
 
+    .gallery-container.open {
+        overflow: auto;
+        display: inline-block;
+        column-count: 3;
+        column-width: 100px;
+    }
+
+}
+
+@media (min-width: 900px){
+    .meme-editor.open {
+        display: grid;
+        grid-template-columns: 460px 460px;
+        justify-items: center;
+        justify-content:space-evenly;
+        gap: 10px;
+    }
 }

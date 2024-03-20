@@ -11,7 +11,7 @@ function renderCanvas() {
     img.src = imgToEdit.url
 
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
-    gLineLocationX = gElCanvas.width / 2
+    lines[gMeme.selectedLineIdx].x = gElCanvas.width / 2
 
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
@@ -20,9 +20,9 @@ function renderCanvas() {
 }
 
 function mouseDown(ev) {
-    
+
     const { lines } = getMeme()
-    const { offsetX, offsetY} = ev
+    const { offsetX, offsetY } = ev
 
     let line = lines.find(line => {
         const { x, y, size } = line
@@ -36,32 +36,37 @@ function mouseDown(ev) {
             lineIdx.x >= offsetX - 300 && lineIdx.x <= offsetX + 300
             && lineIdx.y >= offsetY - lineIdx.size && lineIdx.y <= offsetY + lineIdx.size
         )
-        
+
         lines[gMeme.selectedLineIdx].isMark = false
         gMeme.selectedLineIdx = lineIdx
-        lines[gMeme.selectedLineIdx].isMark = true
-   
+        // lines[gMeme.selectedLineIdx].isMark = true
+        lines[lineIdx].isMark = true
+
     } else {
         lines[gMeme.selectedLineIdx].isMark = false
     }
 }
 
 function drawText() {
-    
-    const { selectedLineIdx: lineIdx, lines } = getMeme()
-    
-    gCtx.textAlign = 'center'
+
+    const { lines } = getMeme()
+
     gCtx.textBaseline = 'middle'
-    
-    let x = gElCanvas.width / 2
-    
+
     lines.forEach(line => {
-        gCtx.font = `${line.size}px Arial`
+        if (line.isDelete) line.txt = ''
+
+        gCtx.textAlign = line.align
+        gCtx.font = `${line.size}px ${line.fontFamily}`
+
         gCtx.fillStyle = line.color
-        gCtx.fillText(line.txt, x, line.y)
-        gCtx.strokeStyle = line.borderColor
-        if (line.isMark)gCtx.strokeRect(100, line.y - line.size / 2, x, line.size)
+        gCtx.fillText(line.txt, line.x, line.y)
+
+        if (line.isMark) gCtx.strokeRect(100, line.y - line.size / 2, line.x, line.size)
         gCtx.stroke()
+
+        gCtx.fillStyle = 'white'
+        line.isDelete = false
     })
 }
 

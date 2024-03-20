@@ -1,7 +1,7 @@
 
 
 .gallery-container.open{
-    display: grid;
+    display: block;
 }
 /* .gallery-container.open img{
     width: 80vw;

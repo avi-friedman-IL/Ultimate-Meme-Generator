@@ -2,31 +2,71 @@
     display: none;
 }
 
-.meme-editor.open{
-    display: grid;
-    justify-items: center;
-}
 .editor{
     display: grid;
     justify-items: center;
+    justify-content: center;
     gap: 20px;
-    width: 100%;
+    width: 460px;
    
     font-size: 1.5rem;
     padding: 50px;
     border-radius: 1.875em;
     background-color: #383b42;
 }
+.btns-lines{
+    display: grid;
+    grid-auto-flow: column;
+    gap: 10px;
+}
+.btns-lines>*{
+    width: 75px;
+    height: 75px;
+    border: 0;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.btns-txt {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    gap: 5px;
+
+    padding: .5em;
+    border-radius: 10px;
+    background-color: rgb(58, 150, 119);
+}
+.btns-txt>*{
+    height: 50px;
+    width: 50px;
+    border: 0;
+    border-radius: 10px;
+}
+
+.delete{
+    background-color: rgb(176, 35, 35);
+}
+.switch-line{
+    background-color: rgb(42, 71, 165);
+}
+.add-line{
+    background-color: rgb(52, 165, 42);
+}
 
 .editor .text {
     width: 100%;
-    padding: 1.5em;
+    padding: .75em;
     border: 0;
     border-radius: 3em;
 }
 
 .editor .download {
-    background-color: #fff;
-    padding: 1em;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    min-width: 60%;
+    padding: .1em;
     border-radius: 3em;
+    background-color: #fff;
 }
