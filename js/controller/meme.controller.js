@@ -59,10 +59,13 @@ function onSelectFont(value) {
 function onClearLine() {
     clearLine()
     renderMeme()
+<<<<<<< HEAD
 }
 
 function onSelectStickers(value) {
     onAddLine()
     selectStickers(value)
     renderMeme()
+=======
+>>>>>>> bbdb2d2ecbbd2687636c5aab63de77cf3d984a75
 }
