@@ -7,17 +7,17 @@ let gPos
 const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 
 function renderCanvas() {
-    addListeners()
-
+    // addListeners()
+    
     const { lines} = getMeme()
-
+    
     const imgToEdit = getImg()
     const img = new Image()
     img.src = imgToEdit.url
-
+    
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
     lines[gMeme.selectedLineIdx].x = gElCanvas.width / 2
-
+    
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText()
@@ -26,7 +26,7 @@ function renderCanvas() {
 
 function addListeners() {
     addMouseListeners()
-    // addTouchListeners()
+    addTouchListeners()
 }
 
 function addMouseListeners() {
@@ -54,13 +54,13 @@ function mouseDown(ev) {
 
     if (line) {
         let lineIdx = lines.findIndex(lineIdx =>
-            lineIdx.x >= offsetX - lineIdx.size && lineIdx.x <= offsetX + lineIdx.size
+            lineIdx.x >= offsetX - 300 && lineIdx.x <= offsetX + 300
             && lineIdx.y >= offsetY - lineIdx.size && lineIdx.y <= offsetY + lineIdx.size
         )
 
         lines[gMeme.selectedLineIdx].isMark = false
         gMeme.selectedLineIdx = lineIdx
-        lines[lineIdx].isMark = true
+        lines[gMeme.selectedLineIdx].isMark = true
 
     } else {
         lines[gMeme.selectedLineIdx].isMark = false
@@ -88,8 +88,8 @@ function onMove(ev) {
 
     moveLine(dx, dy)
     
-    gMeme.lines[gMeme.selectedLineIdx].x = pos.x
-    gMeme.lines[gMeme.selectedLineIdx].y = pos.y
+    gMeme.lines[gMeme.selectedLineIdx].x += pos.x
+    gMeme.lines[gMeme.selectedLineIdx].y += pos.y
 
     gPos = pos
 
@@ -148,13 +148,14 @@ function drawText() {
     lines.forEach(line => {
         // line.borderXL -= line.size / 2
         line.borderXR += 25 / 2
+        line.x += 25 / 2
         if (line.isDelete) line.txt = ''
 
         gCtx.textAlign = line.align
         gCtx.font = `${line.size}px ${line.fontFamily}`
 
         gCtx.fillStyle = line.color
-        gCtx.fillText(line.txt, line.x, line.y)
+        gCtx.fillText(line.txt, line.borderXL, line.y)
 
         if (line.isMark) gCtx.strokeRect(line.borderXL, line.y - line.size , line.borderXR, line.size * 1.5)
         gCtx.stroke()
