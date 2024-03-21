@@ -42,7 +42,6 @@ function addTouchListeners() {
 }
 
 function mouseDown(ev) {
-    
     const { lines } = getMeme()
     const { offsetX, offsetY } = ev
 
@@ -61,8 +60,8 @@ function mouseDown(ev) {
 
         lines[gMeme.selectedLineIdx].isMark = false
         gMeme.selectedLineIdx = lineIdx
-        lines[gMeme.selectedLineIdx].isMark = true
-   
+        lines[lineIdx].isMark = true
+
     } else {
         lines[gMeme.selectedLineIdx].isMark = false
     }
@@ -141,20 +140,21 @@ function moveLine(dx, dy) {
 }
 
 function drawText() {
-    
-    const { selectedLineIdx: lineIdx, lines } = getMeme()
-    
-    gCtx.textAlign = 'center'
-    gCtx.textBaseline = 'middle'
-    
-    let x = gElCanvas.width / 2
-    
+
+    const { lines } = getMeme()
+
     lines.forEach(line => {
-        gCtx.font = `${line.size}px Arial`
+        line.borderXL -= line.size / 2
+        line.borderXR += line.size
+        if (line.isDelete) line.txt = ''
+
+        gCtx.textAlign = line.align
+        gCtx.font = `${line.size}px ${line.fontFamily}`
+
         gCtx.fillStyle = line.color
-        gCtx.fillText(line.txt, x, line.y)
-        gCtx.strokeStyle = line.borderColor
-        if (line.isMark)gCtx.strokeRect(100, line.y - line.size / 2, x, line.size)
+        gCtx.fillText(line.txt, line.x, line.y)
+
+        if (line.isMark) gCtx.strokeRect(line.borderXL, line.y - line.size , line.borderXR, line.size * 1.5)
         gCtx.stroke()
 
         gCtx.fillStyle = 'white'
