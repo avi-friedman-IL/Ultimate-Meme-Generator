@@ -26,7 +26,7 @@ function renderCanvas() {
 
 function addListeners() {
     addMouseListeners()
-    addTouchListeners()
+    // addTouchListeners()
 }
 
 function addMouseListeners() {
@@ -87,10 +87,11 @@ function onMove(ev) {
     const dy = pos.y - gMeme.lines[gMeme.selectedLineIdx].y
 
     moveLine(dx, dy)
-
-    gPos = pos
+    
     gMeme.lines[gMeme.selectedLineIdx].x = pos.x
     gMeme.lines[gMeme.selectedLineIdx].y = pos.y
+
+    gPos = pos
 
     renderCanvas()
 }
@@ -102,28 +103,29 @@ function onUp() {
 }
 
 function getEvPos(ev) {
-    if (TOUCH_EVENTS.includes(ev.type)) {
+    // if (TOUCH_EVENTS.includes(ev.type)) {
 
-        ev.preventDefault()
-        ev = ev.changedTouches[0]
+    //     ev.preventDefault()
+    //     ev = ev.changedTouches[0]
 
-        return {
-            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
-        }
+    //     return {
+    //         x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+    //         y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+    //     }
 
-    } else {
+    // } else {
         return {
             x: ev.offsetX,
             y: ev.offsetY,
         }
     }
-}
+// }
 
 function isLineClicked(clickedPos) {
     const { x, y } = gMeme.lines[gMeme.selectedLineIdx]
 
     const distance =
+    
         Math.sqrt((x - clickedPos.x) ** 2 + (y - clickedPos.y) ** 2)
 
     return distance <= gMeme.lines[gMeme.selectedLineIdx].size
@@ -136,7 +138,7 @@ function setLineDrag(isDrag) {
 
 function moveLine(dx, dy) {
     gMeme.lines[gMeme.selectedLineIdx].x = dx
-    gMeme.lines[gMeme.selectedLineIdx].y += dy
+    gMeme.lines[gMeme.selectedLineIdx].y = dy
 }
 
 function drawText() {
@@ -144,8 +146,8 @@ function drawText() {
     const { lines } = getMeme()
 
     lines.forEach(line => {
-        line.borderXL -= line.size / 2
-        line.borderXR += line.size
+        // line.borderXL -= line.size / 2
+        line.borderXR += 25 / 2
         if (line.isDelete) line.txt = ''
 
         gCtx.textAlign = line.align

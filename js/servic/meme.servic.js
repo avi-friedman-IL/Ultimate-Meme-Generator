@@ -12,12 +12,12 @@ let gMeme = {
     lines: [
         {
             borderXL:200,
-            borderXR:100,
+            borderXR:25,
             x: 100,
             y: 100,
             txt: '',
             size: 25,
-            align: 'center',
+            align: '',
             color: 'white',
             fontFamily: 'Arial',
             isDelete: false,
@@ -138,12 +138,12 @@ function addLine() {
     gMeme.lines.push(
         {
             borderXL:200,
-            borderXR:100,
+            borderXR:25,
             x: 0,
             y: lines[lines.length - 1].y + linePos,
             txt: '',
             size: 25,
-            align: 'center',
+            align: '',
             color: '',
             fontFamily: 'Arial',
             isDelete: false,

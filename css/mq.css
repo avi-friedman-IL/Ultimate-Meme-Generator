@@ -19,6 +19,7 @@
         display: grid;
         grid-template-columns: 460px 460px;
         justify-items: center;
+        align-items: center;
         justify-content:space-evenly;
         gap: 10px;
     }
