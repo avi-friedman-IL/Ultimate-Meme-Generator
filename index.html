@@ -31,23 +31,15 @@
 
         <section class="meme-editor">
             <canvas width="460" height="460" onmousedown="onMouseDown(event)"></canvas>
-<<<<<<< HEAD
 
             <div class="editor">
                 <input type="text" class="text" oninput="onSetLineTxt(this.value)" placeholder="Add Text Here">
 
-=======
-              
-            <div class="editor">
-                <input type="text" class="text" oninput="onSetLineTxt(this)" placeholder="Add Text Here">
-                
->>>>>>> bbdb2d2ecbbd2687636c5aab63de77cf3d984a75
                 <div class="btns-lines">
                     <button class="switch-line" onclick="onSwitchLine()">switch</button>
                     <button class="add-line" onclick="onAddLine()">add line</button>
                     <button class="delete" onclick="onClearLine()">delete</button>
                 </div>
-<<<<<<< HEAD
                 <div class="editor-btns-txt">
                     <div class="btns-txt">
                         <button class="text-size-increase" onclick="onTextSizeIncrease()">A+</button>
@@ -71,25 +63,7 @@
                             <option value="⭐">⭐</option>
                         </select>
                     </div>
-=======
-                
-                <div class="btns-txt">
-                    <button class="text-size-increase" onclick="onTextSizeIncrease()">A+</button>
-                    <button class="text-size-decrease" onclick="onTextSizeDecrease()">A-</button>
-                    <button class="text-size-decrease" onclick="onTextLayout('left')">left</button>
-                    <button class="text-size-decrease" onclick="onTextLayout('right')">right</button>
-                    <button class="text-size-decrease" onclick="onTextLayout('center')">center</button>
-                    <input type="color" class="color" value="white" onchange="onUserColor(event,this.value)"></input>
-                    
-                    <select onchange="onSelectFont(this.value)">
-                        <option value="arial">Arial</option>
-                        <option value="montserrat">Montserrat</option>
-                        <option value="roboto">Roboto</option>
-                        <option value="poppins">Poppins</option>
-                    </select>
->>>>>>> bbdb2d2ecbbd2687636c5aab63de77cf3d984a75
                 </div>
-                
                 <a href="#" onclick="downloadCanvas(this)" download="file-name" class="download">Download</a>
             </div>
             
