@@ -2,17 +2,12 @@
 
 let gImgs
 
-// let gLineLocationX
-// let gLineLocationY = 100
-
 let gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
     linePos: 0,
     lines: [
         {
-            borderXL:200,
-            borderXR:25,
             x: 100,
             y: 100,
             txt: '',
@@ -24,39 +19,37 @@ let gMeme = {
             isMark: true,
             isDrag: false,
         }
-
     ]
 }
 
 let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
-createImgs()
+_createImgs()
 
-function createImg(id, url, keywords) {
+function _createImg(id, url, keywords) {
     return {
         id, url, keywords
     }
 }
 
-function createImgs() {
+function _createImgs() {
     gImgs = [
-        createImg(2, 'meme-imgs/meme-imgs (square)/2.jpg', ['funny', 'cat']),
-        createImg(3, 'meme-imgs/meme-imgs (square)/3.jpg', ['funny', 'cat']),
-        createImg(4, 'meme-imgs/meme-imgs (square)/4.jpg', ['funny', 'cat']),
-        createImg(5, 'meme-imgs/meme-imgs (square)/5.jpg', ['funny', 'cat']),
-        createImg(6, 'meme-imgs/meme-imgs (square)/6.jpg', ['funny', 'cat']),
-        createImg(7, 'meme-imgs/meme-imgs (square)/7.jpg', ['funny', 'cat']),
-        createImg(8, 'meme-imgs/meme-imgs (square)/8.jpg', ['funny', 'cat']),
-        createImg(9, 'meme-imgs/meme-imgs (square)/9.jpg', ['funny', 'cat']),
-        createImg(10, 'meme-imgs/meme-imgs (square)/10.jpg', ['funny', 'cat']),
-        // createImg(11, 'meme-imgs/meme-imgs (square)/11.jpg', ['funny', 'cat']),
-        createImg(12, 'meme-imgs/meme-imgs (square)/12.jpg', ['funny', 'cat']),
-        createImg(13, 'meme-imgs/meme-imgs (square)/13.jpg', ['funny', 'cat']),
-        createImg(14, 'meme-imgs/meme-imgs (square)/14.jpg', ['funny', 'cat']),
-        createImg(15, 'meme-imgs/meme-imgs (square)/15.jpg', ['funny', 'cat']),
-        createImg(16, 'meme-imgs/meme-imgs (square)/16.jpg', ['funny', 'cat']),
-        createImg(17, 'meme-imgs/meme-imgs (square)/17.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/2.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/3.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/4.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/5.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/6.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/7.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/8.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/9.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/10.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/2.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/003.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/004.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/005.jpg', ['funny', 'cat']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/006.jpg', ['funny', 'cat']),
     ]
+    console.log(gImgs);
 }
 
 function getImg() {
@@ -70,6 +63,11 @@ function getMeme() {
 
 function getImgs() {
     return gImgs
+}
+
+function randomizeCanvas() {
+    let idx = gImgs.findIndex((img,idx) => idx === getRandomInt(0,getImgs().length))
+    gMeme.selectedImgId = gImgs[idx].id   
 }
 
 function setImg(id) {
@@ -134,12 +132,10 @@ function selectFont(value) {
 
 function addLine() {
     let { lines, linePos } = gMeme
-    linePos += 30
+    linePos += 50
     gMeme.lines.push(
         {
-            borderXL:200,
-            borderXR:25,
-            x: 0,
+            x: 100,
             y: lines[lines.length - 1].y + linePos,
             txt: '',
             size: 25,

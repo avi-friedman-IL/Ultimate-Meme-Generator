@@ -10,7 +10,17 @@ function renderMeme() {
     renderCanvas()
 }
 
+function onImgSelect(id) {
+    addAndRemoveClass()
+    setImg(id)
+    renderMeme()
+}
 
+function onRandomizeCanvas() {
+    addAndRemoveClass()
+    randomizeCanvas()
+    renderMeme()
+}
 
 function onSetLineTxt(elValue) {
     setLineTxt(elValue)
@@ -66,3 +76,20 @@ function onSelectStickers(value) {
     selectStickers(value)
     renderMeme()
 }
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
+}
+
+function addAndRemoveClass() {
+    document.querySelector('.gallery-container').classList.remove('open')
+    document.querySelector('.meme-editor').classList.add('open')
+    document.body.classList.remove('menu-open')
+}
+
+function toggleClass() {
+    document.querySelector('.gallery-container').classList.toggle('open')
+    document.querySelector('.meme-editor').classList.toggle('open')
+    document.body.classList.remove('menu-open')
+}
+

@@ -1,16 +1,13 @@
-.gallery-container.open{
+.gallery-container.open {
     display: block;
     margin: 50px auto;
     break-inside: avoid;
 }
 
-.gallery-container.open>*{
+.gallery-container.open>* {
     margin-block-end: 0;
 }
-/* .gallery-container.open img{
-    width: 80vw;
-} */
 
-.gallery-container{
+.gallery-container {
     display: none;
 }

@@ -7,17 +7,16 @@ let gPos
 const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 
 function renderCanvas() {
-    // addListeners()
-    
-    const { lines} = getMeme()
-    
+    addListeners()
+
+    const { lines } = getMeme()
+
     const imgToEdit = getImg()
     const img = new Image()
     img.src = imgToEdit.url
-    
+
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
-    lines[gMeme.selectedLineIdx].x = gElCanvas.width / 2
-    
+
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText()
@@ -87,10 +86,10 @@ function onMove(ev) {
     const dy = pos.y - gMeme.lines[gMeme.selectedLineIdx].y
 
     moveLine(dx, dy)
-    
-    gMeme.lines[gMeme.selectedLineIdx].x += pos.x
-    gMeme.lines[gMeme.selectedLineIdx].y += pos.y
 
+    gMeme.lines[gMeme.selectedLineIdx].x = pos.x
+    gMeme.lines[gMeme.selectedLineIdx].y = pos.y
+   
     gPos = pos
 
     renderCanvas()
@@ -103,29 +102,29 @@ function onUp() {
 }
 
 function getEvPos(ev) {
-    // if (TOUCH_EVENTS.includes(ev.type)) {
+    if (TOUCH_EVENTS.includes(ev.type)) {
 
-    //     ev.preventDefault()
-    //     ev = ev.changedTouches[0]
+        ev.preventDefault()
+        ev = ev.changedTouches[0]
 
-    //     return {
-    //         x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-    //         y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
-    //     }
+        return {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
 
-    // } else {
+    } else {
         return {
             x: ev.offsetX,
             y: ev.offsetY,
         }
     }
-// }
+}
 
 function isLineClicked(clickedPos) {
     const { x, y } = gMeme.lines[gMeme.selectedLineIdx]
 
     const distance =
-    
+
         Math.sqrt((x - clickedPos.x) ** 2 + (y - clickedPos.y) ** 2)
 
     return distance <= gMeme.lines[gMeme.selectedLineIdx].size
@@ -146,18 +145,15 @@ function drawText() {
     const { lines } = getMeme()
 
     lines.forEach(line => {
-        // line.borderXL -= line.size / 2
-        line.borderXR += 25 / 2
-        line.x += 25 / 2
         if (line.isDelete) line.txt = ''
 
         gCtx.textAlign = line.align
         gCtx.font = `${line.size}px ${line.fontFamily}`
 
         gCtx.fillStyle = line.color
-        gCtx.fillText(line.txt, line.borderXL, line.y)
+        gCtx.fillText(line.txt, line.x, line.y)
 
-        if (line.isMark) gCtx.strokeRect(line.borderXL, line.y - line.size , line.borderXR, line.size * 1.5)
+        if (line.isMark) gCtx.strokeRect(line.x, line.y - line.size, line.x + 100, line.size * 1.5)
         gCtx.stroke()
 
         gCtx.fillStyle = 'white'

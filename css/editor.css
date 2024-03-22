@@ -72,6 +72,12 @@
     grid-row: 2;
 }
 
+.selects >*{
+    padding: .75em;
+    border-radius: 3em;
+    border: 0;
+}
+
 .editor .download {
     display: grid;
     justify-items: center;
