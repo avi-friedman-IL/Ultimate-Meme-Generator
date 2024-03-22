@@ -137,8 +137,8 @@ function setLineDrag(isDrag) {
 
 
 function moveLine(dx, dy) {
-    gMeme.lines[gMeme.selectedLineIdx].x = dx
-    gMeme.lines[gMeme.selectedLineIdx].y = dy
+    gMeme.lines[gMeme.selectedLineIdx].x += dx
+    gMeme.lines[gMeme.selectedLineIdx].y += dy
 }
 
 function drawText() {

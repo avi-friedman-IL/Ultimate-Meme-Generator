@@ -17,9 +17,9 @@
         <nav>
             <div class="menu-btn" onclick="toggleMenu()">☰</div>
             <ul>
-                <li class="gallery" onclick="toggleToOpenClass()">Gallery</li>
+                <li class="gallery" onclick="toggleClass()">Gallery</li>
                 <li class="saved">Saved</li>
-                <li class="randomize">Randomize</li>
+                <li class="randomize" onclick="onRandomizeCanvas()">Randomize</li>
             </ul>
         </nav>
     </header>
@@ -64,26 +64,33 @@
                         </select>
                     </div>
                 </div>
+                <!-- <input type="file" onchange="onImgInput(event)"> -->
+                <!-- <button onclick="onUploadImg()">F</button> -->
                 <a href="#" onclick="downloadCanvas(this)" download="file-name" class="download">Download</a>
             </div>
-            
-        </section>
 
-        <section class="gallery-container open"></section>
+        </section>
+<img src="meme-imgs/meme-imgs (various aspect ratios)/" alt="">
+        <section class="gallery-container open">
+
+        </section>
     </main>
 
     <script>
-        function toggleMenu() {
-            document.body.classList.toggle('menu-open')
-        }
+        
     </script>
 
+
+    <script src="js/servic/util.service.js"></script>
     <script src="js/servic/storage.service.js"></script>
     <script src="js/servic/meme.servic.js"></script>
 
     <script src="js/controller/gallery.controller.js"></script>
     <script src="js/controller/meme.controller.js"></script>
     <script src="js/controller/canvas.js"></script>
+
+    <script src="js/controller/upload-from-local.js"></script>
+    <script src="js/controller/sharing-on-facebook.js"></script>
 </body>
 
 </html>
