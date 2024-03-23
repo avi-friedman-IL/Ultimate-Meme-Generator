@@ -8,12 +8,11 @@ const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 
 function renderCanvas() {
     addListeners()
-
-    const { lines } = getMeme()
+    const { selectedImgId } = getMeme()
 
     const imgToEdit = getImg()
     const img = new Image()
-    img.src = imgToEdit.url
+    img.src = selectedImgId === 'user' ? gUrl : imgToEdit.url
 
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
 
@@ -89,7 +88,7 @@ function onMove(ev) {
 
     gMeme.lines[gMeme.selectedLineIdx].x = pos.x
     gMeme.lines[gMeme.selectedLineIdx].y = pos.y
-   
+
     gPos = pos
 
     renderCanvas()
@@ -136,8 +135,8 @@ function setLineDrag(isDrag) {
 
 
 function moveLine(dx, dy) {
-    gMeme.lines[gMeme.selectedLineIdx].x = dx
-    gMeme.lines[gMeme.selectedLineIdx].y = dy
+    gMeme.lines[gMeme.selectedLineIdx].x += dx
+    gMeme.lines[gMeme.selectedLineIdx].y += dy
 }
 
 function drawText() {

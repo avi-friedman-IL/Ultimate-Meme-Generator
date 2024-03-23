@@ -11,3 +11,10 @@
 .gallery-container {
     display: none;
 }
+
+.gallery-container .file-import{
+    /* list-style: none; */
+    text-align: center;
+    font-size: 2em;
+    color: azure;
+}

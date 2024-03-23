@@ -2,11 +2,89 @@
     font-family: Montserrat;
     src: url(/fonts/Montserrat_Alternates/MontserratAlternates-Bold.ttf);
 }
+
 @font-face {
     font-family: Roboto;
     src: url(/fonts/Roboto/Roboto-Bold.ttf);
 }
+
 @font-face {
     font-family: Poppins;
     src: url(/fonts/Poppins/Poppins-Bold.ttf);
+}
+
+@font-face {
+    font-family: fa;
+    src: url(/fonts/fa/fa-brands-400.ttf)
+}
+
+@font-face {
+    font-family: fab;
+    src: url(/fonts/fa/fa-brands-400.ttf)
+}
+
+@font-face {
+    font-family: fas;
+    src: url(/fonts/fa/fa-solid-900.ttf);
+}
+
+
+.fa.switch-line::before {
+    font-family: fas;
+    content: "\e4b8";
+}
+
+.fa.add-line::before {
+    font-family: fas;
+    content: "\2b";
+}
+
+.fa.delete::before {
+    font-family: fas;
+    content: "\f1f8";
+}
+
+.facebook::before {
+    font-family: fab;
+    content: "\f39e";
+}
+
+.file-import::before {
+    font-family: fas;
+    content: "\f56e";
+}
+
+.fa.text-size-increase::before {
+    font-family: fas;
+    content: "A +";
+}
+
+.fa.text-size-decrease::before {
+    font-family: fas;
+    content: "A -";
+}
+
+.fa.text-align-left::before {
+    font-family: fas;
+    content: "\f036";
+}
+
+.fa.text-align-right::before {
+    font-family: fas;
+    content: "\f038";
+}
+
+.fa.text-align-center::before {
+    font-family: fas;
+    content: "\f037";
+}
+
+.fa.color::before {
+    font-family: fas;
+    content: "\f1fc";
+}
+
+.fa.download::before {
+    font-family: fas;
+    content: "\f019";
 }

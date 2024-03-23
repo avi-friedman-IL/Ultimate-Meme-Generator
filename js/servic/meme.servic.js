@@ -98,13 +98,13 @@ function textLayout(layout) {
     const { lines } = getMeme()
     switch (layout) {
         case 'left':
-            lines[gMeme.selectedLineIdx].align = 'left'
+            lines[gMeme.selectedLineIdx].x = 50
             break
         case 'center':
-            lines[gMeme.selectedLineIdx].align = 'center'
+            lines[gMeme.selectedLineIdx].x = gElCanvas.width / 2 - 80
             break
         case 'right':
-            lines[gMeme.selectedLineIdx].align = 'right'
+            lines[gMeme.selectedLineIdx].x = 200
             break
     }
 }

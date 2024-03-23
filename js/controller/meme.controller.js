@@ -28,7 +28,6 @@ function onSetLineTxt(elValue) {
 }
 
 function onUserColor(ev, elValue) {
-    console.log(ev);
     setColor(elValue)
     renderMeme()
 }
