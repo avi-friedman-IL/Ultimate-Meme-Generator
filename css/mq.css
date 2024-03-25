@@ -1,4 +1,8 @@
 @media (min-width:600px) {
+    img{
+        width: 100%;
+    }
+
     main {
         display: grid;
         grid-auto-flow: column;

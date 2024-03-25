@@ -9,17 +9,16 @@ const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 function renderCanvas() {
     addListeners()
     const { selectedImgId } = getMeme()
-
+    
     const imgToEdit = getImg()
     const img = new Image()
     img.src = selectedImgId === 'user' ? gUrl : imgToEdit.url
-
+    
     gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
-
     img.onload = () => {
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText()
-    }
+    }    
 }
 
 function addListeners() {
@@ -76,9 +75,9 @@ function onDown(ev) {
 }
 
 function onMove(ev) {
+    ev.preventDefault()
     const { isDrag } = gMeme.lines[gMeme.selectedLineIdx]
     if (!isDrag) return
-    ev.preventDefault()
     const pos = getEvPos(ev)
 
     const dx = pos.x - gMeme.lines[gMeme.selectedLineIdx].x
@@ -101,9 +100,9 @@ function onUp() {
 }
 
 function getEvPos(ev) {
+    ev.preventDefault()
     if (TOUCH_EVENTS.includes(ev.type)) {
 
-        ev.preventDefault()
         ev = ev.changedTouches[0]
 
         return {
@@ -122,11 +121,9 @@ function getEvPos(ev) {
 function isLineClicked(clickedPos) {
     const { x, y } = gMeme.lines[gMeme.selectedLineIdx]
 
-    const distance =
+    const distance = Math.sqrt((x - clickedPos.x) ** 2 + (y - clickedPos.y) ** 2)
 
-        Math.sqrt((x - clickedPos.x) ** 2 + (y - clickedPos.y) ** 2)
-
-    return distance <= gMeme.lines[gMeme.selectedLineIdx].size
+    return distance <= gMeme.lines[gMeme.selectedLineIdx].size + 100
 }
 
 function setLineDrag(isDrag) {
@@ -153,7 +150,6 @@ function drawText() {
         gCtx.fillText(line.txt, line.x, line.y)
 
         if (line.isMark) gCtx.strokeRect(line.x, line.y - line.size, line.x + 100, line.size * 1.5)
-        gCtx.stroke()
 
         gCtx.fillStyle = 'white'
         line.isDelete = false
@@ -161,6 +157,7 @@ function drawText() {
 }
 
 function downloadCanvas(elLink) {
+    gCtx.strokeRect(0, 0, 0, 0)
     elLink.download = 'my-img'
     const dataUrl = gElCanvas.toDataURL()
     elLink.href = dataUrl

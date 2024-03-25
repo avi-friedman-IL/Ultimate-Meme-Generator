@@ -1,7 +1,5 @@
 .gallery-container.open {
     display: block;
-    margin: 50px auto;
-    break-inside: avoid;
 }
 
 .gallery-container.open>* {
@@ -12,8 +10,7 @@
     display: none;
 }
 
-.gallery-container .file-import{
-    /* list-style: none; */
+.gallery-container .file-import {
     text-align: center;
     font-size: 2em;
     color: azure;
