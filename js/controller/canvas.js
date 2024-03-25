@@ -9,16 +9,16 @@ const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 function renderCanvas() {
     addListeners()
     const { selectedImgId } = getMeme()
-    
+
     const imgToEdit = getImg()
     const img = new Image()
     img.src = selectedImgId === 'user' ? gUrl : imgToEdit.url
-    
-    gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
+
     img.onload = () => {
+        gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText()
-    }    
+    }
 }
 
 function addListeners() {
@@ -76,27 +76,27 @@ function onDown(ev) {
 
 function onMove(ev) {
     ev.preventDefault()
-    const { isDrag } = gMeme.lines[gMeme.selectedLineIdx]
+    const { x, y, isDrag } = gMeme.lines[gMeme.selectedLineIdx]
     if (!isDrag) return
     const pos = getEvPos(ev)
 
-    const dx = pos.x - gMeme.lines[gMeme.selectedLineIdx].x
-    const dy = pos.y - gMeme.lines[gMeme.selectedLineIdx].y
-
+    const dx = pos.x - x
+    const dy = pos.y - y
     moveLine(dx, dy)
 
+    
     gMeme.lines[gMeme.selectedLineIdx].x = pos.x
     gMeme.lines[gMeme.selectedLineIdx].y = pos.y
-
+    
     gPos = pos
-
-    renderCanvas()
+    
+    // renderCanvas()
 }
 
 function onUp() {
     setLineDrag(false)
     document.body.style.cursor = 'grab'
-    renderCanvas()
+    // renderCanvas()
 }
 
 function getEvPos(ev) {
@@ -121,9 +121,8 @@ function getEvPos(ev) {
 function isLineClicked(clickedPos) {
     const { x, y } = gMeme.lines[gMeme.selectedLineIdx]
 
-    const distance = Math.sqrt((x - clickedPos.x) ** 2 + (y - clickedPos.y) ** 2)
-
-    return distance <= gMeme.lines[gMeme.selectedLineIdx].size + 100
+    return (clickedPos.x >= x - 25 && clickedPos.x <= x + 100 &&
+        clickedPos.y >= y - 25 && clickedPos.y <= y + 25)
 }
 
 function setLineDrag(isDrag) {
@@ -134,6 +133,7 @@ function setLineDrag(isDrag) {
 function moveLine(dx, dy) {
     gMeme.lines[gMeme.selectedLineIdx].x += dx
     gMeme.lines[gMeme.selectedLineIdx].y += dy
+    renderMeme()
 }
 
 function drawText() {
