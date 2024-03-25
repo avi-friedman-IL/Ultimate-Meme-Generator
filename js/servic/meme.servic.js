@@ -2,6 +2,8 @@
 
 let gImgs
 
+let gPos
+
 let gMeme = {
     selectedImgId: 0,
     selectedLineIdx: 0,
@@ -66,8 +68,8 @@ function getImgs() {
 }
 
 function randomizeCanvas() {
-    let idx = gImgs.findIndex((img,idx) => idx === getRandomInt(0,getImgs().length))
-    gMeme.selectedImgId = gImgs[idx].id   
+    let idx = gImgs.findIndex((img, idx) => idx === getRandomInt(0, getImgs().length))
+    gMeme.selectedImgId = gImgs[idx].id
 }
 
 function setImg(id) {
@@ -83,10 +85,12 @@ function setColor(color) {
 }
 
 function textSizeIncrease() {
+    if (gMeme.lines[gMeme.selectedLineIdx].size > 70) return
     gMeme.lines[gMeme.selectedLineIdx].size += 10
 }
 
 function textSizeDecrease() {
+    if (gMeme.lines[gMeme.selectedLineIdx].size < 20) return
     gMeme.lines[gMeme.selectedLineIdx].size -= 10
 }
 
@@ -146,7 +150,7 @@ function addLine() {
             isMark: true,
             isDrag: false
         })
-    
+
     lines[gMeme.selectedLineIdx].isMark = false
     gMeme.selectedLineIdx = lines.length - 1
     lines[gMeme.selectedLineIdx].txt = ''
@@ -163,5 +167,97 @@ function switchLine() {
     } else {
         gMeme.selectedLineIdx += 1
         lines[gMeme.selectedLineIdx].isMark = true
+    }
+}
+
+function isLineClicked(clickedPos) {
+    const { x, y } = gMeme.lines[gMeme.selectedLineIdx]
+
+    return (clickedPos.x >= x - 25 && clickedPos.x <= x + 100 &&
+        clickedPos.y >= y - 25 && clickedPos.y <= y + 25)
+}
+
+function setLineDrag(isDrag) {
+    gMeme.lines[gMeme.selectedLineIdx].isDrag = isDrag
+}
+
+
+function moveLine(dx, dy) {
+    gMeme.lines[gMeme.selectedLineIdx].x += dx
+    gMeme.lines[gMeme.selectedLineIdx].y += dy
+    renderMeme()
+}
+
+function mouseDown(ev) {
+    const { lines } = getMeme()
+    const { offsetX, offsetY } = ev
+
+    let line = lines.find(line => {
+        const { x, y, size } = line
+
+        return (offsetX >= x - 300 && offsetX <= x + 300 &&
+            offsetY >= y - size && offsetY <= y + size)
+    })
+
+    if (line) {
+        let lineIdx = lines.findIndex(lineIdx =>
+            lineIdx.x >= offsetX - 300 && lineIdx.x <= offsetX + 300
+            && lineIdx.y >= offsetY - lineIdx.size && lineIdx.y <= offsetY + lineIdx.size
+        )
+
+        lines[gMeme.selectedLineIdx].isMark = false
+        gMeme.selectedLineIdx = lineIdx
+        lines[gMeme.selectedLineIdx].isMark = true
+
+    } else {
+        lines[gMeme.selectedLineIdx].isMark = false
+    }
+}
+
+function onDown(ev) {
+    ev.preventDefault()
+    gPos = getEvPos(ev)
+
+    if (!isLineClicked(gPos)) return
+
+    setLineDrag(true)
+    document.body.style.cursor = 'grabbing'
+}
+
+function onMove(ev) {
+    ev.preventDefault()
+    const { x, y, isDrag } = gMeme.lines[gMeme.selectedLineIdx]
+    if (!isDrag) return
+    const pos = getEvPos(ev)
+
+    const dx = pos.x - x
+    const dy = pos.y - y
+    moveLine(dx, dy)
+
+    
+    gMeme.lines[gMeme.selectedLineIdx].x = pos.x
+    gMeme.lines[gMeme.selectedLineIdx].y = pos.y
+    
+    gPos = pos
+    
+    // renderCanvas()
+}
+
+function getEvPos(ev) {
+    ev.preventDefault()
+    if (TOUCH_EVENTS.includes(ev.type)) {
+
+        ev = ev.changedTouches[0]
+
+        return {
+            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
+            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop,
+        }
+
+    } else {
+        return {
+            x: ev.offsetX,
+            y: ev.offsetY,
+        }
     }
 }
