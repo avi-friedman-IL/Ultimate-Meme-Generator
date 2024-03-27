@@ -4,25 +4,41 @@ let gImgs
 
 let gPos
 
-let gMeme = {
-    selectedImgId: 0,
-    selectedLineIdx: 0,
-    linePos: 0,
-    lines: [
-        {
-            x: 100,
-            y: 100,
-            txt: '',
-            size: 25,
-            align: '',
-            color: 'white',
-            fontFamily: 'Arial',
-            isDelete: false,
-            isMark: true,
-            isDrag: false,
-        }
-    ]
+let gMeme
+
+let gMemes
+
+
+_createMeme()
+
+function _createMeme() {
+    gMeme = {
+        selectedImgId: '',
+        selectedLineIdx: 0,
+        linePos: 0,
+        lines: [
+            {
+                x: 100,
+                y: 100,
+                txt: '',
+                size: 25,
+                align: '',
+                color: 'white',
+                fontFamily: 'Arial',
+                isDelete: false,
+                isMark: true,
+                isDrag: false,
+            }
+        ]
+    }
+    return gMeme
 }
+
+_createMemes()
+function _createMemes() {
+    gMemes = []
+}
+
 
 let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
@@ -51,7 +67,6 @@ function _createImgs() {
         _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/005.jpg', ['funny', 'cat']),
         _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/006.jpg', ['funny', 'cat']),
     ]
-    console.log(gImgs);
 }
 
 function getImg() {
@@ -68,7 +83,7 @@ function getImgs() {
 }
 
 function randomizeCanvas() {
-    let idx = gImgs.findIndex((img, idx) => idx === getRandomInt(0, getImgs().length))
+    let idx = gImgs.findIndex((img, idx) => idx === getRandomInt(0, getImgs().length - 1))
     gMeme.selectedImgId = gImgs[idx].id
 }
 
@@ -234,12 +249,12 @@ function onMove(ev) {
     const dy = pos.y - y
     moveLine(dx, dy)
 
-    
+
     gMeme.lines[gMeme.selectedLineIdx].x = pos.x
     gMeme.lines[gMeme.selectedLineIdx].y = pos.y
-    
+
     gPos = pos
-    
+
     // renderCanvas()
 }
 
@@ -260,4 +275,9 @@ function getEvPos(ev) {
             y: ev.offsetY,
         }
     }
+}
+
+function saveMeme(canvas) {
+    gMemes.push({ url: canvas.toDataURL(), id: gMeme.selectedImgId })
+    saveToStorage('memes', gMemes)
 }
