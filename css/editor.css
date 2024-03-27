@@ -16,7 +16,7 @@
     background-color: #383b42;
 }
 
-.msg{
+.msg {
     position: absolute;
     right: 3em;
     bottom: 3em;
@@ -27,7 +27,7 @@
     transition: 1s;
 }
 
-.msg::after{
+.msg::after {
     font-family: far;
     content: "\f058" " " "saved";
 }
@@ -50,7 +50,7 @@
     display: grid;
     grid-auto-flow: column;
     align-items: center;
-    justify-items: center;
+    justify-items: start;
     gap: 10px;
     border-radius: 10px;
     padding: .8em;
@@ -64,7 +64,11 @@
     width: 50px;
     border: 0;
     border-radius: 10px;
+    cursor: pointer;
+}
 
+.btns-txt>*:hover{
+    color: rgb(39, 105, 105);
 }
 
 .delete {
@@ -103,14 +107,28 @@
     grid-row: 2;
 }
 
-.selects>* {
+.selects>*:not(:first-child) {
+    width: 1fr;
     padding: .75em;
     border-radius: 3em;
     border: 0;
+    cursor: pointer;
+}
+
+.selects>:first-child {
+    text-align: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    border: 0;
+    cursor: pointer;
+}
+
+.selects>:first-child:hover {
+    color: blueviolet;
 }
 
 .share>* {
-
     padding: 1em;
     font-size: .5em;
     border-radius: 50%;
@@ -124,4 +142,8 @@
 
 .share>*:hover {
     color: rgb(75, 131, 199);
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+    display: none;
 }

@@ -56,6 +56,7 @@
 .file-import::before {
     font-family: fas;
     content: "\f56e";
+    color: black;
 }
 
 .fa.text-size-increase::before {

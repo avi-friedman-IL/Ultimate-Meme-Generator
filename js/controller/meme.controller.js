@@ -17,6 +17,7 @@ function onImgSelect(id) {
     document.querySelector('.meme-editor').classList.add('open')
     document.querySelector('.gallery-container').classList.remove('open')
     document.querySelector('.save').classList.remove('open')
+    document.querySelector('.file-import').style.display = 'none'
 
     setImg(id)
     renderMeme()
@@ -148,6 +149,8 @@ function onOpenSaveMeme() {
     document.querySelector('.meme-editor').classList.remove('open')
     document.querySelector('.gallery-container').classList.remove('open')
     document.body.classList.remove('menu-open')
+    document.querySelector('.file-import').style.display = 'none'
+
 }
 
 function onSaveMeme() {
@@ -169,6 +172,8 @@ function onMemeGallery() {
     document.querySelector('.gallery-container').classList.add('open')
     document.querySelector('.meme-editor').classList.remove('open')
     document.body.classList.remove('menu-open')
+    document.querySelector('.file-import').style.display = 'block'
+    
 }
 
 function onRandomizeCanvas() {
@@ -178,5 +183,6 @@ function onRandomizeCanvas() {
     document.querySelector('.save').classList.remove('open')
     document.querySelector('.meme-editor').classList.add('open')
     document.body.classList.remove('menu-open')
+    document.querySelector('.file-import').style.display = 'none'
 
 }
