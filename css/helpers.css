@@ -1,4 +1,17 @@
 .open {
-    display:grid;
+    display: grid;
     justify-items: center;
+}
+
+.save {
+    display: none;
+}
+
+.save.open {
+    display: block;
+    column-count: 3;
+}
+
+.save.open img{
+    width: 200px;
 }

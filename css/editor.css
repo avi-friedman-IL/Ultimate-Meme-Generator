@@ -1,5 +1,6 @@
 .meme-editor {
     display: none;
+    position: relative;
 }
 
 .editor {
@@ -10,9 +11,25 @@
     width: 460px;
 
     font-size: 1.5rem;
-    padding: 50px;
+    padding: 1.5em;
     border-radius: 1.875em;
     background-color: #383b42;
+}
+
+.msg{
+    position: absolute;
+    right: 3em;
+    bottom: 3em;
+    opacity: 0;
+    font-size: 1.5em;
+    color: lightgreen;
+
+    transition: 1s;
+}
+
+.msg::after{
+    font-family: far;
+    content: "\f058" " " "saved";
 }
 
 .btns-lines {
@@ -32,12 +49,13 @@
 .editor-btns-txt {
     display: grid;
     grid-auto-flow: column;
-    background-color: rgb(58, 150, 119);
     align-items: center;
     justify-items: center;
     gap: 10px;
     border-radius: 10px;
-    padding: .5em;
+    padding: .8em;
+
+    background-color: rgb(58, 150, 119);
 }
 
 
@@ -46,6 +64,7 @@
     width: 50px;
     border: 0;
     border-radius: 10px;
+
 }
 
 .delete {
@@ -58,6 +77,18 @@
 
 .add-line {
     background-color: rgb(96, 177, 88);
+}
+
+.delete:hover::after {
+    content: "delete";
+}
+
+.add-line:hover::after {
+    content: "add line";
+}
+
+.switch-line:hover::after {
+    content: "switch line";
 }
 
 .editor .text {
@@ -78,26 +109,19 @@
     border: 0;
 }
 
-.editor .download {
-    display: grid;
-    justify-items: center;
-    align-items: center;
-    min-width: 60%;
-    padding: .1em;
-    border-radius: 3em;
-    background-color: #fff;
-}
+.share>* {
 
-.facebook {
     padding: 1em;
+    font-size: .5em;
     border-radius: 50%;
     background-color: rgb(49, 49, 62);
     color: aliceblue;
     cursor: pointer;
+    border: 0;
 
     transition: .5s;
 }
 
-.facebook:hover {
-    padding: 1.2em;
+.share>*:hover {
+    color: rgb(75, 131, 199);
 }

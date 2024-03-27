@@ -14,14 +14,11 @@ function renderMeme() {
 }
 
 function onImgSelect(id) {
-    addAndRemoveClass()
-    setImg(id)
-    renderMeme()
-}
+    document.querySelector('.meme-editor').classList.add('open')
+    document.querySelector('.gallery-container').classList.remove('open')
+    document.querySelector('.save').classList.remove('open')
 
-function onRandomizeCanvas() {
-    addAndRemoveClass()
-    randomizeCanvas()
+    setImg(id)
     renderMeme()
 }
 
@@ -79,21 +76,6 @@ function onSelectStickers(value) {
     renderMeme()
 }
 
-function toggleMenu() {
-    document.body.classList.toggle('menu-open')
-}
-
-function addAndRemoveClass() {
-    document.querySelector('.gallery-container').classList.remove('open')
-    document.querySelector('.meme-editor').classList.add('open')
-    document.body.classList.remove('menu-open')
-}
-
-function toggleClass() {
-    document.querySelector('.gallery-container').classList.toggle('open')
-    document.querySelector('.meme-editor').classList.toggle('open')
-    document.body.classList.remove('menu-open')
-}
 
 const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
 
@@ -146,11 +128,11 @@ function drawText() {
 
         gCtx.fillStyle = 'white'
         line.isDelete = false
+        gCtx.strokeRect(0, 0, 0, 0)
     })
 }
 
 function downloadCanvas(elLink) {
-    gCtx.strokeRect(0, 0, 0, 0)
     elLink.download = 'my-img'
     const dataUrl = gElCanvas.toDataURL()
     elLink.href = dataUrl
@@ -159,5 +141,42 @@ function downloadCanvas(elLink) {
 function onUp() {
     setLineDrag(false)
     document.body.style.cursor = 'grab'
-    // renderCanvas()
+}
+
+function onOpenSaveMeme() {
+    document.querySelector('.save').classList.add('open')
+    document.querySelector('.meme-editor').classList.remove('open')
+    document.querySelector('.gallery-container').classList.remove('open')
+    document.body.classList.remove('menu-open')
+}
+
+function onSaveMeme() {
+    saveMeme(gElCanvas)
+    const memes = loadFromStorage('memes')
+    let strHTML = memes.map(meme => `<img src="${meme.url}" onclick="onImgSelect('${meme.id}')">`)
+    
+    document.querySelector('.save').innerHTML = strHTML
+    document.querySelector('.msg').style.opacity = 1
+    setTimeout(() => document.querySelector('.msg').style.opacity = 0,2000)
+
+}
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
+}
+
+function onMemeGallery() {
+    document.querySelector('.gallery-container').classList.add('open')
+    document.querySelector('.meme-editor').classList.remove('open')
+    document.body.classList.remove('menu-open')
+}
+
+function onRandomizeCanvas() {
+    randomizeCanvas()
+    renderMeme()
+    document.querySelector('.gallery-container').classList.remove('open')
+    document.querySelector('.save').classList.remove('open')
+    document.querySelector('.meme-editor').classList.add('open')
+    document.body.classList.remove('menu-open')
+
 }

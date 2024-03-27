@@ -28,10 +28,14 @@
     src: url(fonts/fa/fa-solid-900.ttf);
 }
 
+@font-face {
+    font-family: far;
+    src: url(fonts/fa/fa-regular-400.ttf);
+}
 
 .fa.switch-line::before {
     font-family: fas;
-    content: "\e4b8";
+    content: "\e4af";
 }
 
 .fa.add-line::before {
@@ -87,4 +91,9 @@
 .fa.download::before {
     font-family: fas;
     content: "\f019";
+}
+
+.save-meme::before{
+    font-family: far;
+    content: "\f0c7";
 }

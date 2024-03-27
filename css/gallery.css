@@ -11,7 +11,9 @@
 }
 
 .gallery-container .file-import {
+    width: 200px;
+    height: 200px;
     text-align: center;
-    font-size: 2em;
+    font-size: 1em;
     color: azure;
 }
