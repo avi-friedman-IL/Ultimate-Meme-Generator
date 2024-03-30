@@ -21,7 +21,7 @@ body {
 
 img {
     margin: 0;
-    width: 80%;
+    width: 100%;
     border-radius: 10px;
     cursor: pointer;
 
@@ -29,8 +29,9 @@ img {
 }
 
 img:hover {
-    padding: .5em;
+    /* padding: .1em; */
     opacity: 0.8;
+    border-radius: 0;
 }
 
 ul {
@@ -47,13 +48,13 @@ a {
 }
 
 main {
-    position: relative;
-    margin: 80px auto;
+    margin: 7em auto;
     display: grid;
-    grid-template-columns: 30px 1fr 30px;
+    grid-template-columns: 5vw 1fr 5vw;
     gap: 10px;
 }
 
 main>* {
+
     grid-column: 2;
 }

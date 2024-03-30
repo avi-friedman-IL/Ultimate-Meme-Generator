@@ -11,24 +11,21 @@
 <body class="main-layout" onload="onInit()">
 
     <div class="main-screen" onclick="toggleMenu()"></div>
-
     <header class="main-header">
         <h2 class="logo">Meme Generator</h2>
         <nav>
             <div class="menu-btn" onclick="toggleMenu()">☰</div>
             <ul>
-                <li class="gallery" onclick="onMemeGallery()">Gallery</li>
+                <li class="gallery-btn" onclick="onMemeGallery()">Gallery</li>
                 <li class="saved" onclick="onOpenSaveMeme()">Saved</li>
                 <li class="randomize" onclick="onRandomizeCanvas()">Randomize</li>
             </ul>
         </nav>
     </header>
 
-    <main>
-        <section class="filter-searth" hidden>
-            <input type="search" data-trans="search" class="search" placeholder="search">
-        </section>
 
+
+    <main>
         <section class="meme-editor">
             <canvas width="460" height="460" onmousedown="onMouseDown(event)"></canvas>
 
@@ -74,17 +71,26 @@
             <section class="msg"></section>
         </section>
 
-        <a href="#"><input type="file" class="file-import" onchange="onImgInput(event)"></a>
-        <section class="gallery-container open">
-        </section>
+        <div class="gallery open">
+            <input type="file" name="file" class="file-import" onchange="onImgInput(event)">
+            <section class="filter-search">
+                <input type="search" oninput="onSearchImg(this.value)" placeholder="search">
+            </section>
+            <section class="key-words-container">
+                <button onclick="onClearFilter()">clear filter</button>
+                <button class="key-words key-words1" value="happy" onclick="onKeyWordsClick(this.value)">happy</button>
+                <button class="key-words key-words2" value="sad" onclick="onKeyWordsClick(this.value)">sad</button>
+            </section>
 
-        <section class="save">
-        </section>
+            <section class="gallery-container">
+            </section>
+        </div>
+        <section class="save"></section>
     </main>
 
     <script src="js/servic/util.service.js"></script>
     <script src="js/servic/storage.service.js"></script>
-    
+
     <script src="js/servic/meme.servic.js"></script>
 
     <script src="js/controller/gallery.controller.js"></script>

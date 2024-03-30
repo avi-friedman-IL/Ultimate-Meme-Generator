@@ -1,5 +1,6 @@
 header {
     position: fixed;
+    top: 0;
     right: 0;
     left: 0;
     display: grid;
@@ -11,19 +12,16 @@ header {
 
     background-color: #5970c1;
     background-image: linear-gradient(-86deg, #33be6d 0, #0c98b9 100%);
+    z-index: 1;
 }
 
-.main-header {
-    position: relative;
-}
-
-.main-header h2 {
+header h2 {
     display: inline-block;
     font-size: 2em;
     min-width: max-content;
 }
 
-.menu-btn {
+header .menu-btn {
     display: inline-block;
 
     cursor: pointer;
@@ -37,7 +35,7 @@ nav {
     position: relative;
 }
 
-.main-header ul {
+header ul {
     display: grid;
     align-content: start;
     justify-content: center;
@@ -53,7 +51,7 @@ nav {
 
     color: #ffffff;
     background-color: var(--primary-color-1);
-   
+
     z-index: 9999;
 
     transform: translateX(100%);
@@ -61,11 +59,11 @@ nav {
 
 }
 
-.main-header ul>:first-child {
+header ul>:first-child {
     margin-block-start: 2.5em;
 }
 
-.main-header li {
+header li {
     display: grid;
     justify-content: center;
     align-self: center;
@@ -76,11 +74,7 @@ nav {
     font-size: 1.4em;
 }
 
-.main-header li:hover {
-    color: #33be6d;
-}
-
-.main-header li:hover{
+header li:hover {
     color: #33be6d;
 }
 

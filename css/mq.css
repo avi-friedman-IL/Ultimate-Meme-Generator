@@ -1,15 +1,12 @@
-@media (min-width:600px) {
-    img{
-        width: 100%;
-    }
-
+@media (min-width: 600px) {
     main {
+        margin: 7em auto;
         display: grid;
-        grid-auto-flow: column;
-        grid-template-columns: minmax(50px 1fr) 1fr minmax(50px 1fr);
+        grid-template-columns: 15vw 1fr 15vw;
+        gap: 10px;
     }
 
-    .gallery-container.open {
+    .gallery-container {
         overflow: auto;
         display: inline-block;
         column-count: 3;
@@ -21,10 +18,9 @@
 @media (min-width: 900px) {
     .meme-editor.open {
         display: grid;
-        grid-template-columns: 460px 460px;
+        grid-auto-flow: column;
         justify-items: center;
         align-items: center;
-        justify-content: space-evenly;
         gap: 10px;
     }
 }

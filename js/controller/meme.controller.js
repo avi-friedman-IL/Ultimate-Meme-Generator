@@ -15,7 +15,7 @@ function renderMeme() {
 
 function onImgSelect(id) {
     document.querySelector('.meme-editor').classList.add('open')
-    document.querySelector('.gallery-container').classList.remove('open')
+    document.querySelector('.gallery').classList.remove('open')
     document.querySelector('.save').classList.remove('open')
     document.querySelector('.file-import').style.display = 'none'
 
@@ -61,7 +61,6 @@ function onMouseDown(ev) {
 }
 
 function onSelectFont(value) {
-    console.log('hi');
     selectFont(value)
     renderMeme()
 }
@@ -75,6 +74,21 @@ function onSelectStickers(value) {
     onAddLine()
     selectStickers(value)
     renderMeme()
+}
+
+function onSearchImg(value){
+    searchImg(value)
+    renderGallery()
+}
+
+function onKeyWordsClick(value) {
+    filterByWords(value)
+    renderGallery()
+}
+
+function onClearFilter() {
+    clearFilter()
+    renderGallery()
 }
 
 
@@ -147,7 +161,7 @@ function onUp() {
 function onOpenSaveMeme() {
     document.querySelector('.save').classList.add('open')
     document.querySelector('.meme-editor').classList.remove('open')
-    document.querySelector('.gallery-container').classList.remove('open')
+    document.querySelector('.gallery').classList.remove('open')
     document.body.classList.remove('menu-open')
     document.querySelector('.file-import').style.display = 'none'
 
@@ -169,7 +183,7 @@ function toggleMenu() {
 }
 
 function onMemeGallery() {
-    document.querySelector('.gallery-container').classList.add('open')
+    document.querySelector('.gallery').classList.add('open')
     document.querySelector('.meme-editor').classList.remove('open')
     document.body.classList.remove('menu-open')
     document.querySelector('.file-import').style.display = 'block'
@@ -179,7 +193,7 @@ function onMemeGallery() {
 function onRandomizeCanvas() {
     randomizeCanvas()
     renderMeme()
-    document.querySelector('.gallery-container').classList.remove('open')
+    document.querySelector('.gallery').classList.remove('open')
     document.querySelector('.save').classList.remove('open')
     document.querySelector('.meme-editor').classList.add('open')
     document.body.classList.remove('menu-open')

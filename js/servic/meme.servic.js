@@ -1,5 +1,6 @@
 'use strict'
 
+let gImgsFiltered
 let gImgs
 
 let gPos
@@ -8,7 +9,7 @@ let gMeme
 
 let gMemes
 
-
+getFiltered()
 _createMeme()
 
 function _createMeme() {
@@ -34,6 +35,7 @@ function _createMeme() {
     return gMeme
 }
 
+_createImgs()
 _createMemes()
 function _createMemes() {
     gMemes = []
@@ -42,7 +44,6 @@ function _createMemes() {
 
 let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
-_createImgs()
 
 function _createImg(id, url, keywords) {
     return {
@@ -51,31 +52,47 @@ function _createImg(id, url, keywords) {
 }
 
 function _createImgs() {
-    gImgs = [
-        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/2.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/3.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/4.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/5.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/6.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/7.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/8.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/9.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/10.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/2.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/003.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/004.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/005.jpg', ['funny', 'cat']),
-        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/006.jpg', ['funny', 'cat']),
+   return gImgs = [
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/2.jpg', ['happy']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/3.jpg', ['happy']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/4.jpg', ['happy']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/5.jpg', ['happy']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/6.jpg', ['happy']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/7.jpg', ['happy']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/8.jpg', ['happy']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/9.jpg', ['happy']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (square)/10.jpg', ['happy']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/2.jpg', ['sad']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/003.jpg', ['sad']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/004.jpg', ['sad']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/005.jpg', ['sad']),
+        _createImg(makeId(), 'meme-imgs/meme-imgs (various aspect ratios)/006.jpg', ['sad']),
     ]
+}
+
+function filterByWords(value) {
+     gImgsFiltered = gImgs.filter(img => img.keywords.find(key => key === value))
+     console.log(gImgsFiltered)
+}
+
+function searchImg(value) {
+    gImgsFiltered = gImgs.filter(img => img.keywords.find(key => key.includes(value)))
+}
+
+function getFiltered() {
+    return gImgsFiltered
+}
+
+function clearFilter() {
+    gImgsFiltered = ''
 }
 
 function getImg() {
     return gImgs.find(img => img.id === gMeme.selectedImgId)
-
 }
+
 function getMeme() {
     return gMeme
-
 }
 
 function getImgs() {
