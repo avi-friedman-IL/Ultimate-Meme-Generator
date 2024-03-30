@@ -19,6 +19,7 @@ function _createMeme() {
         linePos: 0,
         lines: [
             {
+                borderR: 100,
                 x: 100,
                 y: 100,
                 txt: '',
@@ -37,6 +38,7 @@ function _createMeme() {
 
 _createImgs()
 _createMemes()
+
 function _createMemes() {
     gMemes = []
 }
@@ -171,6 +173,7 @@ function addLine() {
     linePos += 50
     gMeme.lines.push(
         {
+            borderR: 100,
             x: 100,
             y: lines[lines.length - 1].y + linePos,
             txt: '',

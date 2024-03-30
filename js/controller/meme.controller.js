@@ -3,7 +3,9 @@
 let gElCanvas
 let gCtx
 
+
 function onInit() {
+
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
     renderGallery()
@@ -11,6 +13,54 @@ function onInit() {
 
 function renderMeme() {
     renderCanvas()
+}
+
+function addListeners() {
+    addMouseListeners()
+    addTouchListeners()
+    addKeyListeners()
+}
+
+function addKeyListeners() {
+    document.body.addEventListener('keydown', onKeydown)
+}
+
+function onKeydown(ev) {
+    const { lines } = getMeme()
+    
+    lines.forEach(line =>
+        ev.key === 'Backspace' ? line.borderR -= 8 : line.borderR += 8
+    )
+}
+
+function addMouseListeners() {
+    gElCanvas.addEventListener('mousedown', onDown)
+    gElCanvas.addEventListener('mousemove', onMove)
+    gElCanvas.addEventListener('mouseup', onUp)
+}
+
+function addTouchListeners() {
+    gElCanvas.addEventListener('touchstart', onDown)
+    gElCanvas.addEventListener('touchmove', onMove)
+    gElCanvas.addEventListener('touchend', onUp)
+}
+
+const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
+
+function renderCanvas() {
+    addListeners()
+    const { selectedImgId } = getMeme()
+
+    const imgToEdit = getImg()
+    const img = new Image()
+    img.src = selectedImgId === 'user' ? gUrl : imgToEdit.url
+
+    img.onload = () => {
+
+        gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
+        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+        drawText()
+    }
 }
 
 function onImgSelect(id) {
@@ -46,6 +96,7 @@ function onTextLayout(layout) {
     renderMeme()
 }
 function onAddLine() {
+    document.querySelector('input.text').value = ''
     addLine()
     renderMeme()
 }
@@ -76,7 +127,7 @@ function onSelectStickers(value) {
     renderMeme()
 }
 
-function onSearchImg(value){
+function onSearchImg(value) {
     searchImg(value)
     renderGallery()
 }
@@ -91,46 +142,11 @@ function onClearFilter() {
     renderGallery()
 }
 
-
-const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
-
-function renderCanvas() {
-    addListeners()
-    const { selectedImgId } = getMeme()
-
-    const imgToEdit = getImg()
-    const img = new Image()
-    img.src = selectedImgId === 'user' ? gUrl : imgToEdit.url
-
-    img.onload = () => {
-        gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
-        gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
-        drawText()
-    }
-}
-
-function addListeners() {
-    addMouseListeners()
-    addTouchListeners()
-}
-
-function addMouseListeners() {
-    gElCanvas.addEventListener('mousedown', onDown)
-    gElCanvas.addEventListener('mousemove', onMove)
-    gElCanvas.addEventListener('mouseup', onUp)
-}
-
-function addTouchListeners() {
-    gElCanvas.addEventListener('touchstart', onDown)
-    gElCanvas.addEventListener('touchmove', onMove)
-    gElCanvas.addEventListener('touchend', onUp)
-}
-
 function drawText() {
-
     const { lines } = getMeme()
 
     lines.forEach(line => {
+
         if (line.isDelete) line.txt = ''
 
         gCtx.textAlign = line.align
@@ -139,7 +155,7 @@ function drawText() {
         gCtx.fillStyle = line.color
         gCtx.fillText(line.txt, line.x, line.y)
 
-        if (line.isMark) gCtx.strokeRect(line.x, line.y - line.size, line.x + 100, line.size * 1.5)
+        if (line.isMark) gCtx.strokeRect(line.x, line.y - line.size, line.borderR, line.size * 1.5)
 
         gCtx.fillStyle = 'white'
         line.isDelete = false
@@ -171,10 +187,10 @@ function onSaveMeme() {
     saveMeme(gElCanvas)
     const memes = loadFromStorage('memes')
     let strHTML = memes.map(meme => `<img src="${meme.url}" onclick="onImgSelect('${meme.id}')">`)
-    
+
     document.querySelector('.save').innerHTML = strHTML
     document.querySelector('.msg').style.opacity = 1
-    setTimeout(() => document.querySelector('.msg').style.opacity = 0,2000)
+    setTimeout(() => document.querySelector('.msg').style.opacity = 0, 2000)
 
 }
 
@@ -187,7 +203,7 @@ function onMemeGallery() {
     document.querySelector('.meme-editor').classList.remove('open')
     document.body.classList.remove('menu-open')
     document.querySelector('.file-import').style.display = 'block'
-    
+
 }
 
 function onRandomizeCanvas() {
