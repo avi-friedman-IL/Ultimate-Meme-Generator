@@ -118,6 +118,7 @@ function onSelectFont(value) {
 }
 
 function onClearLine() {
+    document.querySelector('input.text').value = ''
     clearLine()
     renderMeme()
 }

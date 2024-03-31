@@ -151,7 +151,6 @@ function clearLine() {
     if(gMeme.selectedLineIdx <= 0) return
     gMeme.lines.splice([gMeme.selectedLineIdx],1)
     gMeme.selectedLineIdx -= 1
-
 }
 
 function selectFont(value) {
