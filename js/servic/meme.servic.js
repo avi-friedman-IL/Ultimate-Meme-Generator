@@ -1,6 +1,7 @@
 'use strict'
 
 let gImgsFiltered
+
 let gImgs
 
 let gPos
@@ -43,7 +44,6 @@ function _createMemes() {
     gMemes = []
 }
 
-
 let gKeywordSearchCountMap = { 'funny': 12, 'cat': 16, 'baby': 2 }
 
 
@@ -74,7 +74,6 @@ function _createImgs() {
 
 function filterByWords(value) {
      gImgsFiltered = gImgs.filter(img => img.keywords.find(key => key === value))
-     console.log(gImgsFiltered)
 }
 
 function searchImg(value) {
@@ -149,6 +148,10 @@ function textLayout(layout) {
 
 function clearLine() {
     gMeme.lines[gMeme.selectedLineIdx].isDelete = true
+    if(gMeme.selectedLineIdx <= 0) return
+    gMeme.lines.splice([gMeme.selectedLineIdx],1)
+    gMeme.selectedLineIdx -= 1
+
 }
 
 function selectFont(value) {
@@ -274,8 +277,6 @@ function onMove(ev) {
     gMeme.lines[gMeme.selectedLineIdx].y = pos.y
 
     gPos = pos
-
-    // renderCanvas()
 }
 
 function getEvPos(ev) {

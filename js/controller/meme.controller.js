@@ -1,11 +1,11 @@
 'use strict'
 
+const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
+
 let gElCanvas
 let gCtx
 
-
 function onInit() {
-
     gElCanvas = document.querySelector('canvas')
     gCtx = gElCanvas.getContext('2d')
     renderGallery()
@@ -21,18 +21,6 @@ function addListeners() {
     addKeyListeners()
 }
 
-function addKeyListeners() {
-    document.body.addEventListener('keydown', onKeydown)
-}
-
-function onKeydown(ev) {
-    const { lines } = getMeme()
-    
-    lines.forEach(line =>
-        ev.key === 'Backspace' ? line.borderR -= 8 : line.borderR += 8
-    )
-}
-
 function addMouseListeners() {
     gElCanvas.addEventListener('mousedown', onDown)
     gElCanvas.addEventListener('mousemove', onMove)
@@ -45,7 +33,18 @@ function addTouchListeners() {
     gElCanvas.addEventListener('touchend', onUp)
 }
 
-const TOUCH_EVENTS = ['touchstart', 'touchmove', 'touchend']
+
+function addKeyListeners() {
+    document.body.addEventListener('keydown', onKeydown)
+}
+
+function onKeydown(ev) {
+    const { lines } = getMeme()
+    
+    lines.forEach(line =>
+        ev.key === 'Backspace' ? line.borderR -= 8 : line.borderR += 8
+    )
+}
 
 function renderCanvas() {
     addListeners()
@@ -56,7 +55,6 @@ function renderCanvas() {
     img.src = selectedImgId === 'user' ? gUrl : imgToEdit.url
 
     img.onload = () => {
-
         gElCanvas.height = (img.naturalHeight / img.naturalWidth) * gElCanvas.width
         gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
         drawText()
@@ -87,14 +85,17 @@ function onTextSizeIncrease() {
     textSizeIncrease()
     renderMeme()
 }
+
 function onTextSizeDecrease() {
     textSizeDecrease()
     renderMeme()
 }
+
 function onTextLayout(layout) {
     textLayout(layout)
     renderMeme()
 }
+
 function onAddLine() {
     document.querySelector('input.text').value = ''
     addLine()
@@ -142,6 +143,56 @@ function onClearFilter() {
     renderGallery()
 }
 
+function downloadCanvas(elLink) {
+    elLink.download = 'my-img'
+    const dataUrl = gElCanvas.toDataURL()
+    elLink.href = dataUrl
+}
+
+function onUp() {
+    setLineDrag(false)
+    document.querySelector('canvas').style.cursor = 'grab'
+}
+
+function onOpenSaveMeme() {
+    document.querySelector('.save').classList.add('open')
+    document.querySelector('.meme-editor').classList.remove('open')
+    document.querySelector('.gallery').classList.remove('open')
+    document.body.classList.remove('menu-open')
+    document.querySelector('.file-import').style.display = 'none'
+}
+
+function onSaveMeme() {
+    saveMeme(gElCanvas)
+    const memes = loadFromStorage('memes')
+    let strHTML = memes.map(meme => `<img src="${meme.url}" onclick="onImgSelect('${meme.id}')">`)
+
+    document.querySelector('.save').innerHTML = strHTML
+    document.querySelector('.msg').style.opacity = 1
+    setTimeout(() => document.querySelector('.msg').style.opacity = 0, 2000)
+}
+
+function toggleMenu() {
+    document.body.classList.toggle('menu-open')
+}
+
+function onMemeGallery() {
+    document.querySelector('.gallery').classList.add('open')
+    document.querySelector('.meme-editor').classList.remove('open')
+    document.body.classList.remove('menu-open')
+    document.querySelector('.file-import').style.display = 'block'
+}
+
+function onRandomizeCanvas() {
+    randomizeCanvas()
+    renderMeme()
+    document.querySelector('.gallery').classList.remove('open')
+    document.querySelector('.save').classList.remove('open')
+    document.querySelector('.meme-editor').classList.add('open')
+    document.body.classList.remove('menu-open')
+    document.querySelector('.file-import').style.display = 'none'
+}
+
 function drawText() {
     const { lines } = getMeme()
 
@@ -161,58 +212,4 @@ function drawText() {
         line.isDelete = false
         gCtx.strokeRect(0, 0, 0, 0)
     })
-}
-
-function downloadCanvas(elLink) {
-    elLink.download = 'my-img'
-    const dataUrl = gElCanvas.toDataURL()
-    elLink.href = dataUrl
-}
-
-function onUp() {
-    setLineDrag(false)
-    document.body.style.cursor = 'grab'
-}
-
-function onOpenSaveMeme() {
-    document.querySelector('.save').classList.add('open')
-    document.querySelector('.meme-editor').classList.remove('open')
-    document.querySelector('.gallery').classList.remove('open')
-    document.body.classList.remove('menu-open')
-    document.querySelector('.file-import').style.display = 'none'
-
-}
-
-function onSaveMeme() {
-    saveMeme(gElCanvas)
-    const memes = loadFromStorage('memes')
-    let strHTML = memes.map(meme => `<img src="${meme.url}" onclick="onImgSelect('${meme.id}')">`)
-
-    document.querySelector('.save').innerHTML = strHTML
-    document.querySelector('.msg').style.opacity = 1
-    setTimeout(() => document.querySelector('.msg').style.opacity = 0, 2000)
-
-}
-
-function toggleMenu() {
-    document.body.classList.toggle('menu-open')
-}
-
-function onMemeGallery() {
-    document.querySelector('.gallery').classList.add('open')
-    document.querySelector('.meme-editor').classList.remove('open')
-    document.body.classList.remove('menu-open')
-    document.querySelector('.file-import').style.display = 'block'
-
-}
-
-function onRandomizeCanvas() {
-    randomizeCanvas()
-    renderMeme()
-    document.querySelector('.gallery').classList.remove('open')
-    document.querySelector('.save').classList.remove('open')
-    document.querySelector('.meme-editor').classList.add('open')
-    document.body.classList.remove('menu-open')
-    document.querySelector('.file-import').style.display = 'none'
-
 }
